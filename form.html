@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>form </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <nav  style="background-color: #303339;" class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a style="color: #E9ECEF;" class="navbar-brand" href="#">Cark</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav d">
+              <li class="nav-item">
+                <a  style="color: #babcbebd;" class="nav-link active " aria-current="page" href="ome.html">Home</a>
+              </li>
+             
+    
+            
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+
+    <div style="background-color: #e6e6e6;" class="donation">
+        <h1>Bill of sale - replacement cars</h1>
+        <form id="donationForm">
+            <fieldset>
+                <legend>Personal information</legend>
+                <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required ><span id="name-msg" style="color: red;"></span>
+                </div>
+                <br>
+                <div>
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <br>
+                <div>
+                    <label for="email">Confirm your Email:</label>
+                    <input type="email" id="email2" name="email" required><span id="msg" style="color: red;"></span>
+                </div>
+                <br>
+                <div id="select">
+                your gender :
+                <input type="radio" name="gender" value="male" id="1" required>male
+                <input type="radio" name="gender"value="female" id="2" required>female <span id="gender-msg" style="color: red;"></span>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Car information</legend>
+                <div>
+                    <label for="brand">What is your car brand :</label>
+                    <input type="text" id="carBrand" name="carBrand" required><span id="brand-msg" style="color: red;"></span>
+                </div>
+                <br>
+                <div>
+                    <label for="model">What model is your car :</label>
+                    <input type="number" id="carModel" name="carModel" required> <span id="model-msg" style="color: red;"></span>
+                </div>
+<br>
+<br>
+                <div>
+                    <p style="color: red; font-size: 90%; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Note: The store tax is 10%.</p>
+                    <label for="model">The price at which the car is to be sold : </label>
+                    <input type="number" id="carprice" name="carModel" required> <span id="price-msg" style="color: red;"></span>
+                </div>
+
+
+            </fieldset>
+            <br>
+            <label for="radio">Enter your payment method :</label>
+            <input type="radio" name="card" id="visa" required>Visa
+            <input type="radio" name="card" id="master" required>Master card
+            <input type="radio" name="card" id="other" required >cash
+            <input type="radio" name="card" id="other" required checked>other
+            <br>
+            <div id="clock"></div>
+            <br>
+            <div>
+                <button type="button" id="submit" onclick="printData()">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+            <div id="userInfoBox"></div>
+        </form>
+    </div>
+    <br>
+    <br>
+    <footer class="footer bg-dark text-light text-center py-3">
+        <div class="container">
+            <p>&copy; 2023 Car Parts Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+
+
+
+
+        function printData() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var emailCon = document.getElementById("email2").value;
+            var gender = document.getElementsByName("gender");
+            var male=document.getElementById("1");
+            var female=document.getElementById("2");
+            var carBrand = document.getElementById("carBrand").value;
+            var carModel = document.getElementById("carModel").value;
+            var carprice = document.getElementById("carprice").value;
+            var cond1=1;
+            var cond2=1;
+            var cond3;
+            var cond4=1;
+            var cond5=1;
+            var cond6=1;
+            var afterTax;
+            var select=" ";
+            
+            if(name==""){
+                cond1=0
+                  document.getElementById("name-msg").innerHTML="This field must not be left empty!"
+            }
+
+            if( email=="")
+            {
+            cond2=0;
+            document.getElementById("msg").innerHTML=(" Enter email !");
+            }
+
+            if(email!=emailCon){
+                cond2=0
+                document.getElementById("msg").innerHTML=(" invalid email !");
+            }
+
+            if(male.checked)
+            {
+                select="male";
+                cond3=1;
+            }
+            else if(female.checked){
+                select="female";
+                cond3=1;
+            }
+            else  
+             {
+                cond3=0;
+                document.getElementById("gender-msg").innerHTML="You must choose the gender!";
+
+             }
+            
+             if(carBrand=="")
+             {
+             cond4=0;
+             document.getElementById("brand-msg").innerHTML="You must choose the car brand!";
+            
+             }
+
+             if(carModel<=0)
+             {
+                cond5=0;
+                document.getElementById("model-msg").innerHTML="You must choose the correct model!";
+             }
+           
+              if(carprice<=999)
+              {
+              cond6=0;
+              document.getElementById("price-msg").innerHTML="You must enter a price above $1000 ";
+
+              }
+              else {
+                        afterTax= carprice-(carprice*0.10)
+
+              }
+            
+
+
+           if((cond1+cond2+cond3+cond4+cond5+cond6)==6)
+           {
+            var userInfoBox = document.getElementById("userInfoBox").innerHTML="<h3>User Information:</h3>" +
+                "<strong>Name : " + name + "<br>" +
+                "<strong>Email : " + email + "<br>" +
+                "<strong>Gender : " + select + "<br>" +
+                "<strong>Car Brand : " + carBrand + "<br>" +
+                "<strong>Car Model : " + carModel + "<br>" + 
+                    "<strong>Car price : " + afterTax + "<br>" + 
+                        "<strong> Store tax : " + carprice*0.10 + "<br>";  
+                }  
+                
+        }
+        var time =setInterval(timer,1000);
+        function timer(){
+            var d=new Date();
+            document.getElementById("clock").innerHTML=d.toLocaleTimeString();
+        }
+        
+    </script>
+</body>
+
+</html>
